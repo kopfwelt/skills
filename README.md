@@ -14,7 +14,7 @@ design-thinking-skill/
 │   ├── export-contract.md      # Rückkanal-Schema (v1) — Quelle der Wahrheit
 │   ├── discover/empathy-map.md
 │   ├── define/hmw.md
-│   └── ideate/crazy-8s.md
+│   └── ideate/                 # crazy-8s, dot-voting, impact-effort-matrix
 ├── assets/
 │   └── canvas-base.html        # generischer Renderer, liest METHOD_CONFIG
 └── scripts/
@@ -57,10 +57,12 @@ Kernideen:
 ## Roadmap
 
 1. ✅ Export-Contract + Frontmatter-Schema + 3 Methoden + Renderer
-2. Methoden für `prototype/` und `test/` ergänzen, dot-voting und
-   impact-effort-matrix (die `naechste_methoden` von crazy-8s)
-3. Eval-Loop: Testprompts mit/ohne Skill fahren, Trigger-Rate der
+2. ✅ Konvergenz-Methoden dot-voting und impact-effort-matrix
+   (inkl. `zonen_quelle`-Konvention für dynamisch erzeugte Zonen)
+3. Methoden für `prototype/` (storyboard, wizard-of-oz) und `test/`
+   ergänzen
+4. Eval-Loop: Testprompts mit/ohne Skill fahren, Trigger-Rate der
    description messen
-4. Optional MCP-Server: `list_methods`, `get_session`, `submit_canvas`,
+5. Optional MCP-Server: `list_methods`, `get_session`, `submit_canvas`,
    State in SQLite — erst wenn Session-übergreifender State oder
    Team-Sharing gebraucht wird

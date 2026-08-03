@@ -10,7 +10,8 @@ Empfehlung plus eine Alternative.
 |---|---|
 | "Wir wissen nicht genau, was das Problem ist" / "Wir kennen unsere Nutzer nicht" | discover |
 | "Wir haben viel Material, aber keinen Fokus" / "Was ist eigentlich die Kernfrage?" | define |
-| "Uns fallen keine Lösungen ein" / "Wir drehen uns im Kreis" / "Zu wenig Optionen" | ideate |
+| "Uns fallen keine Lösungen ein" / "Wir drehen uns im Kreis" / "Zu wenig Optionen" | ideate (Divergenz) |
+| "Zu viele Ideen" / "Wir müssen uns entscheiden" / "Was setzen wir zuerst um?" | ideate (Konvergenz) |
 | "Wir haben Ideen, wissen aber nicht, ob sie funktionieren" | prototype |
 | "Wir wollen wissen, wie Nutzer reagieren" | test |
 
@@ -32,11 +33,22 @@ ein unklares Problem. Wenn kein Problem-Statement vorliegt
 |---|---|---|---|---|
 | hmw | 20–30 min | 2–10 | Erkenntnisse aus discover (z. B. Empathy Map) | Problem bekannt, aber noch nicht als bearbeitbare Frage formuliert |
 
-### ideate
+### ideate — Divergenz (Ideen erzeugen)
 
 | Methode | Zeit | Gruppe | braucht | gut wenn |
 |---|---|---|---|---|
 | crazy-8s | 15 min | 1–8 | Problem-Statement / HMW-Frage | festgefahrene Diskussion, Quantität vor Qualität |
+
+### ideate — Konvergenz (Ideen priorisieren)
+
+| Methode | Zeit | Gruppe | braucht | gut wenn |
+|---|---|---|---|---|
+| dot-voting | 10 min | 3–12 | Ideenliste (5+ Optionen) | schnelle demokratische Vorauswahl, dominante Stimmen bremsen |
+| impact-effort-matrix | 30 min | 2–8 | Ideenliste (max. ~15) | Machbarkeit ist die kritische Dimension, Auswahl muss begründbar sein |
+
+Konvergenz-Tie-Breaker: dot-voting sortiert schnell grob vor,
+impact-effort-matrix entscheidet fundiert. Bei vielen Optionen und
+genug Zeit: erst dot-voting, dann die Spitzengruppe durch die Matrix.
 
 *(prototype und test: noch keine Methodendateien — bei Bedarf ergänzen,
 bis dahin ehrlich sagen, dass der Skill dort noch nichts anbietet.)*

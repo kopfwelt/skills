@@ -37,6 +37,12 @@ Anfang von `canvas-base.html`). Ändere sonst nichts am Renderer — wenn
 eine Methode nicht ohne Renderer-Änderung darstellbar ist, ist das ein
 Schema-Problem, das gemeldet gehört, kein Anlass für Sonderlocken.
 
+Sonderfall `zonen_quelle` im `canvas`-Block: Die Zonen stehen dann nicht
+im Frontmatter, sondern du erzeugst sie beim Rendern aus dem benannten
+Input (z. B. eine Zone pro Idee der `ideen_liste`) — Details stehen in
+der jeweiligen Methodendatei. Der Renderer bekommt in jedem Fall ein
+fertiges `zonen`-Array.
+
 Das Artefakt braucht zwingend:
 - Timer pro Zone, wenn `zeit_pro_zone` gesetzt ist
 - Persistenz über `window.storage` (Fallback localStorage) unter
