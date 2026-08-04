@@ -6,7 +6,7 @@ gruppe: [2, 8]
 braucht_input: [nutzer_beschreibung, rohnotizen]
 liefert_output: [empathie_erkenntnisse]
 gut_bei: [Nutzerperspektive fehlt, Team argumentiert aus Eigensicht, viele unsortierte Interviewnotizen]
-schlecht_bei: [keine echten Nutzerdaten vorhanden, Entscheidung steht an]
+schlecht_bei: [weder Nutzerdaten noch Proxy-Quellen vorhanden, Entscheidung steht an]
 canvas:
   typ: quadrants
   zonen:
@@ -39,6 +39,25 @@ naechste_methoden: [hmw]
    Diese Widersprüche sind die wertvollsten Erkenntnisse und der
    Rohstoff für HMW-Fragen.
 
+## Proxy-Variante (keine Interviews vorhanden)
+
+Fehlen echte Nutzer-Rohnotizen, ist die Map trotzdem sinnvoll — wenn
+Proxy-Quellen existieren: Support-Tickets, Sales-Gespräche,
+Analytics-Auffälligkeiten, eigene Beobachtungen. Zwei Regeln machen
+den Unterschied zwischen Methode und Kaffeesatz:
+
+1. **Quelle vs. Vermutung strikt trennen.** Einträge ohne Quelle sind
+   Hypothesen und werden als solche markiert (Präfix "H:").
+2. **Der eigentliche Output verschiebt sich:** Der Wert liegt weniger
+   in der Wahrheit der Einträge als darin, sichtbar zu machen, wo
+   Wissen und wo Hypothesen stehen. Die markierten Hypothesen werden
+   zur Interview-Liste — sag das vorher an, sonst wirkt die Map wie
+   validiertes Wissen.
+
+Gibt es auch keine Proxy-Quellen (neues Produkt, kein Kontakt zu
+Nutzern), ist die Methode falsch — dann ehrlich auf Nutzerforschung
+verweisen statt eine Map aus reinen Vermutungen zu bauen.
+
 ## Moderationshinweise
 
 - Einträge ohne Beleg in den Rohnotizen gehören in *Denkt* als markierte
@@ -50,5 +69,7 @@ naechste_methoden: [hmw]
 
 - Cluster über Quadranten hinweg bilden, nicht pro Quadrant.
 - Sagt/Tut-Widersprüche explizit als solche ausweisen.
+- Bei der Proxy-Variante: "H:"-Einträge getrennt auswerten und als
+  Interview-Liste ausgeben, nicht mit belegten Erkenntnissen mischen.
 - Output für die Kette: 3–5 `empathie_erkenntnisse` als je ein Satz,
   jede mit Quadranten-Beleg.

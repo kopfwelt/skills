@@ -23,11 +23,24 @@ AskUserQuestion falls verfügbar, sonst als kompakte Rückfrage:
 3. Wie viel Zeit?
 4. Was liegt schon vor? (Interviews, Personas, Ideenliste, nichts)
 
+Beantwortet der Prompt bereits alle vier Punkte, nicht erneut fragen.
+Fehlt etwas, frag nur das Fehlende — und warte auf die Antwort, statt
+Frage und Empfehlung in dieselbe Nachricht zu packen. Was du dabei
+annimmst statt weißt (z. B. "vermutlich keine Interviews vorhanden"),
+benenne als Annahme.
+
 Lies dann `references/auswahlmatrix.md` und schlage **eine** Methode vor,
 mit einem Satz Begründung und einer Alternative. Nicht drei gleichwertige
 Optionen anbieten — Auswahl ist die Leistung dieses Skills.
 
 ## Phase 2 — Canvas rendern
+
+**Rendere genau ein Canvas** — das der gewählten Methode. Die
+Folgemethode (`naechste_methoden`) wird erst nach der Auswertung in
+Phase 3 gerendert, nie auf Vorrat: ihr `kontext` besteht aus den
+Ergebnissen der aktuellen Methode, und die existieren vorher nicht.
+Ein HMW-Canvas ohne Erkenntnisse ist ein leeres Formular, kein
+Werkzeug.
 
 Lies die Methodendatei unter `references/<phase>/<id>.md`. Nimm
 `assets/canvas-base.html` als Grundlage und ersetze den Block
