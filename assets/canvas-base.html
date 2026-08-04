@@ -13,8 +13,13 @@
     "layout":       "grid" | "quadrants" | "list",
     "zeit_pro_zone": 60,                      // Sekunden, weglassen = kein Timer
     "kontext":      { "problem_statement": "…" },  // braucht_input-Werte
+    "durchfuehrung": [                        // Ablauf-Schritte, ausklappbar hinter ⓘ
+      { "titel": "Nutzer festlegen (5 min)", "text": "Eine konkrete Person …" }
+    ],
+    "tipps": [ "Wer zuerst abstimmt, ankert." ],   // Moderationshinweise, optional
     "zonen": [
-      { "id": "z1", "titel": "Idee 1", "hinweis": "…" }
+      { "id": "z1", "titel": "Idee 1", "hinweis": "…",
+        "info": "längere Erläuterung, ausklappbar hinter ⓘ" }  // optional
     ]
   }
 
@@ -63,6 +68,22 @@
   button:disabled { opacity: .5; cursor: default; }
   .timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 1.1rem; min-width: 4.5rem; }
   .timer.warn { color: var(--danger); }
+  details.info { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 1.25rem; }
+  details.info > summary { cursor: pointer; padding: .6rem 1rem; font-weight: 600; list-style: none; display: flex; align-items: center; gap: .5rem; }
+  details.info > summary::-webkit-details-marker { display: none; }
+  details.info > summary .chev { margin-left: auto; transition: transform .15s; color: var(--muted); }
+  details.info[open] > summary .chev { transform: rotate(90deg); }
+  .info-badge { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-size: .8rem; font-style: normal; font-weight: 700; flex: none; }
+  details.info .body { padding: 0 1rem .9rem; }
+  details.info ol { margin: 0 0 .5rem; padding-left: 1.3rem; }
+  details.info ol li { margin-bottom: .4rem; }
+  details.info ol li strong { display: block; }
+  details.info .tipps { margin: .5rem 0 0; padding-left: 1.3rem; color: var(--muted); }
+  details.info .tipps-titel { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: .75rem 0 .25rem; }
+  details.zone-info { margin: 0 0 .5rem; }
+  details.zone-info > summary { cursor: pointer; list-style: none; font-size: .8rem; color: var(--accent); display: inline-flex; align-items: center; gap: .3rem; }
+  details.zone-info > summary::-webkit-details-marker { display: none; }
+  details.zone-info p { font-size: .85rem; color: var(--muted); margin: .35rem 0 0; padding: .5rem .65rem; background: var(--bg); border-left: 3px solid var(--accent); border-radius: 4px; }
   .zones { display: grid; gap: .9rem; }
   .zones.grid { grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); }
   .zones.quadrants { grid-template-columns: repeat(2, 1fr); }
@@ -89,6 +110,16 @@
   <div class="phase-tag" id="phaseTag"></div>
   <h1 id="titel"></h1>
   <p class="anleitung" id="anleitung"></p>
+  <details class="info" id="durchfuehrung" hidden>
+    <summary><i class="info-badge">i</i> So wird's durchgeführt <span class="chev">›</span></summary>
+    <div class="body">
+      <ol id="schritte"></ol>
+      <div id="tippsWrap" hidden>
+        <p class="tipps-titel">Moderationshinweise</p>
+        <ul class="tipps" id="tipps"></ul>
+      </div>
+    </div>
+  </details>
   <dl class="kontext" id="kontext" hidden></dl>
 
   <div class="toolbar" id="timerbar" hidden>
@@ -141,6 +172,26 @@ document.getElementById("titel").textContent = CONFIG.titel || CONFIG.method_id;
 document.getElementById("anleitung").textContent = CONFIG.anleitung || "";
 document.title = (CONFIG.titel || CONFIG.method_id) + " – Canvas";
 
+/* --- Durchführungs-Panel (ⓘ) --- */
+if (CONFIG.durchfuehrung?.length) {
+  const panel = document.getElementById("durchfuehrung");
+  panel.hidden = false;
+  const ol = document.getElementById("schritte");
+  for (const s of CONFIG.durchfuehrung) {
+    const li = document.createElement("li");
+    if (s.titel) { const b = document.createElement("strong"); b.textContent = s.titel; li.append(b); }
+    li.append(document.createTextNode(s.text || ""));
+    ol.append(li);
+  }
+  if (CONFIG.tipps?.length) {
+    document.getElementById("tippsWrap").hidden = false;
+    const ul = document.getElementById("tipps");
+    for (const t of CONFIG.tipps) {
+      const li = document.createElement("li"); li.textContent = t; ul.append(li);
+    }
+  }
+}
+
 const ktx = document.getElementById("kontext");
 const kontextEntries = Object.entries(CONFIG.kontext || {});
 if (kontextEntries.length) {
@@ -161,6 +212,14 @@ function renderZone(zone) {
   el.className = "zone"; el.id = "zone-" + zone.id;
   const h = document.createElement("h2"); h.textContent = zone.titel; el.append(h);
   if (zone.hinweis) { const p = document.createElement("p"); p.className = "hinweis"; p.textContent = zone.hinweis; el.append(p); }
+  if (zone.info) {
+    const det = document.createElement("details"); det.className = "zone-info";
+    const sum = document.createElement("summary");
+    const badge = document.createElement("i"); badge.className = "info-badge"; badge.textContent = "i";
+    sum.append(badge, document.createTextNode(" Mehr dazu"));
+    const p = document.createElement("p"); p.textContent = zone.info;
+    det.append(sum, p); el.append(det);
+  }
   const ul = document.createElement("ul"); ul.className = "entries"; el.append(ul);
 
   function renderEntries() {

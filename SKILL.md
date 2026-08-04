@@ -57,6 +57,11 @@ der jeweiligen Methodendatei. Der Renderer bekommt in jedem Fall ein
 fertiges `zonen`-Array.
 
 Das Artefakt braucht zwingend:
+- `durchfuehrung` und `tipps` im Config, befüllt aus den Abschnitten
+  "Ablauf" und "Moderationshinweise" der Methodendatei — vollständig
+  übernehmen, nicht auf einen Satz eindampfen; das Canvas muss auch
+  ohne den Chat daneben moderierbar sein. Für erklärungsbedürftige
+  Zonen zusätzlich `info` am Zonen-Objekt (ausklappbar hinter ⓘ).
 - Timer pro Zone, wenn `zeit_pro_zone` gesetzt ist
 - Persistenz über `window.storage` (Fallback localStorage) unter
   `dt:<session_id>`
