@@ -1,0 +1,23 @@
+{
+  "name": "kopfwelt-skills",
+  "version": "0.1.0",
+  "description": "Kopfwelt's agent skills — starting with design thinking facilitation: method selection, interactive workshop canvases, and result analysis.",
+  "author": {
+    "name": "Kopfwelt",
+    "url": "https://kopfwelt.com"
+  },
+  "homepage": "https://kopfwelt.com/skills",
+  "repository": "https://github.com/kopfwelt/skills",
+  "license": "MIT",
+  "keywords": [
+    "design-thinking",
+    "facilitation",
+    "workshops",
+    "ideation",
+    "canvas",
+    "skills"
+  ],
+  "skills": [
+    "./skills/facilitation/design-thinking-methods"
+  ]
+}

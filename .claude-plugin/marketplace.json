@@ -1,0 +1,22 @@
+{
+  "name": "kopfwelt",
+  "owner": {
+    "name": "Kopfwelt",
+    "url": "https://kopfwelt.com"
+  },
+  "description": "Kopfwelt's agent skills, installable as a Claude Code plugin.",
+  "plugins": [
+    {
+      "name": "kopfwelt-skills",
+      "source": "./",
+      "description": "Design thinking facilitation skills — method selection, interactive workshop canvases, result analysis.",
+      "category": "productivity",
+      "keywords": [
+        "design-thinking",
+        "facilitation",
+        "workshops",
+        "ideation"
+      ]
+    }
+  ]
+}

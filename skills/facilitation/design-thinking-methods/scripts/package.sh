@@ -6,12 +6,14 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 NAME="design-thinking-methods"
 DIST="dist"
+REPO_ROOT="$(git rev-parse --show-toplevel)"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
 # Only what the skill needs at runtime (plus LICENSE) — no README, no dist.
 mkdir -p "$STAGE/$NAME"
-cp SKILL.md LICENSE "$STAGE/$NAME/"
+cp SKILL.md "$STAGE/$NAME/"
+cp "$REPO_ROOT/LICENSE" "$STAGE/$NAME/"
 cp -R references assets scripts "$STAGE/$NAME/"
 rm -f "$STAGE/$NAME/scripts/package.sh"
 
