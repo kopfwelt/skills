@@ -10,7 +10,7 @@ and the canvas — is rendered in the conversation language**.
 ## Architecture
 
 ```
-design-thinking-skill/
+skills/facilitation/design-thinking-methods/
 ├── SKILL.md                    # diagnose → select → render → analyze
 ├── references/
 │   ├── selection-matrix.md     # phase × situation × time × group size
