@@ -1,10 +1,9 @@
-# Export-Contract
+# Export Contract
 
-Das JSON, das der "Ergebnis exportieren"-Button jedes Canvas in die
-Zwischenablage legt — und das Phase 3 des Skills parst. Dieses Schema ist
-zugleich das Payload eines späteren `submit_canvas`-MCP-Tools. Änderungen
-hier sind Breaking Changes: Version hochzählen, alte Version weiter
-akzeptieren.
+The JSON that every canvas's "Export result" button places on the
+clipboard — and that phase 3 of the skill parses. This schema is also
+the payload of a future `submit_canvas` MCP tool. Changes here are
+breaking changes: bump the version, keep accepting the old one.
 
 ## Schema (v1)
 
@@ -14,40 +13,40 @@ akzeptieren.
   "session_id": "dt-2026-08-03-a1",
   "method_id": "crazy-8s",
   "phase": "ideate",
-  "kontext": {
+  "context": {
     "problem_statement": "..."
   },
-  "eingaben": [
-    { "zone": "z1", "text": "...", "autor": null }
+  "entries": [
+    { "zone": "z1", "text": "...", "author": null }
   ],
   "meta": {
-    "dauer_tatsaechlich_min": 12,
-    "teilnehmer": 4,
-    "exportiert_am": "2026-08-03T14:30:00Z"
+    "actual_duration_min": 12,
+    "participants": 4,
+    "exported_at": "2026-08-03T14:30:00Z"
   }
 }
 ```
 
-## Feldregeln
+## Field rules
 
-| Feld | Typ | Pflicht | Regel |
+| Field | Type | Required | Rule |
 |---|---|---|---|
-| `contract_version` | int | ja | aktuell `1` |
-| `session_id` | string | ja | Format `dt-<YYYY-MM-DD>-<kurzid>`, vergeben vom Skill in Phase 2 |
-| `method_id` | string | ja | muss einer Methodendatei entsprechen (`id` im Frontmatter) |
-| `phase` | string | ja | `discover` \| `define` \| `ideate` \| `prototype` \| `test` |
-| `kontext` | object | ja | die `braucht_input`-Werte, mit denen das Canvas gerendert wurde; leeres Objekt erlaubt |
-| `eingaben[].zone` | string | ja | Zonen-ID aus dem Canvas-Config (`z1`, `z2`, … oder sprechende IDs wie `says`) |
-| `eingaben[].text` | string | ja | Rohtext, nicht getrimmt außer Whitespace an den Rändern |
-| `eingaben[].autor` | string\|null | nein | optional, `null` wenn nicht erfasst |
-| `meta.dauer_tatsaechlich_min` | int\|null | nein | vom Timer gemessen, sonst `null` |
-| `meta.teilnehmer` | int\|null | nein | Selbstauskunft im Canvas, sonst `null` |
-| `meta.exportiert_am` | string | ja | ISO 8601 UTC |
+| `contract_version` | int | yes | currently `1` |
+| `session_id` | string | yes | format `dt-<YYYY-MM-DD>-<shortid>`, assigned by the skill in phase 2 |
+| `method_id` | string | yes | must match a method file (`id` in its frontmatter) |
+| `phase` | string | yes | `discover` \| `define` \| `ideate` \| `prototype` \| `test` |
+| `context` | object | yes | the `requires_input` values the canvas was rendered with; empty object allowed |
+| `entries[].zone` | string | yes | zone id from the canvas config (`z1`, `z2`, … or semantic ids like `says`) |
+| `entries[].text` | string | yes | raw text, trimmed only at the edges |
+| `entries[].author` | string\|null | no | optional, `null` if not captured |
+| `meta.actual_duration_min` | int\|null | no | measured by the timer, otherwise `null` |
+| `meta.participants` | int\|null | no | self-reported in the canvas, otherwise `null` |
+| `meta.exported_at` | string | yes | ISO 8601 UTC |
 
-## Parsing-Regeln für Phase 3
+## Parsing rules for phase 3
 
-- Unbekannte Zusatzfelder ignorieren, nicht ablehnen (forward compatible).
-- Fehlt ein Pflichtfeld: konkret benennen, was fehlt, und um erneuten
-  Export bitten — nicht raten.
-- Leere `eingaben`: nicht auswerten, sondern nachfragen, ob der Export zu
-  früh geklickt wurde.
+- Ignore unknown extra fields, don't reject them (forward compatible).
+- If a required field is missing: name exactly what is missing and ask
+  for a re-export — don't guess.
+- Empty `entries`: don't analyze; ask whether export was clicked too
+  early.

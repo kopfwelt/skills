@@ -1,95 +1,109 @@
 ---
 name: design-thinking-methods
-description: Wählt passende Design-Thinking-Methoden aus, stellt sie als
-  interaktives Canvas-Artefakt bereit und wertet die Eingaben aus, um die
-  nächste Prozessphase vorzuschlagen. Nutze diesen Skill immer, wenn es um
-  Workshop-Planung, Ideenfindung, Problem-Framing, Nutzerforschung,
-  Retrospektiven, Priorisierung oder Formulierungen wie "wir kommen nicht
-  weiter", "wie strukturiere ich den Workshop", "welche Methode passt"
-  geht — auch wenn "Design Thinking" nicht explizit fällt.
+description: Selects the right design thinking method for the situation,
+  renders it as an interactive canvas artifact, and analyzes the entered
+  results to propose the next process step. Use whenever the conversation
+  is about workshop planning, ideation, problem framing, user research,
+  retrospectives, or prioritization — including phrases like "we're
+  stuck", "how do I structure this workshop", "which method fits" (or
+  German "wir kommen nicht weiter", "welche Methode passt") — even if
+  "design thinking" is never mentioned. Canvases are rendered in the
+  conversation language.
 ---
 
-# Design-Thinking-Methoden
+# Design Thinking Methods
 
-Drei Phasen. Überspringe keine, aber halte Phase 1 kurz.
+Three phases. Skip none, but keep phase 1 short.
 
-## Phase 1 — Diagnose
+## Language
 
-Ohne Diagnose keine Methodenauswahl. Klär genau diese vier Dinge, per
-AskUserQuestion falls verfügbar, sonst als kompakte Rückfrage:
+Method files and this skill are written in English. **Everything the
+user sees is produced in the conversation language**: your responses,
+and every user-facing string in the canvas config (`title`,
+`instructions`, `steps`, `tips`, zone `title`/`hint`/`info`, and the
+`ui` block). Translate from the method file on the fly. Zone `id`s,
+context keys, and export fields always stay in English — they are
+contract, not copy.
 
-1. Wo steht ihr? (Problem unklar / Lösungen fehlen / Auswahl steht an / Test)
-2. Wie viele Personen?
-3. Wie viel Zeit?
-4. Was liegt schon vor? (Interviews, Personas, Ideenliste, nichts)
+## Phase 1 — Diagnosis
 
-Beantwortet der Prompt bereits alle vier Punkte, nicht erneut fragen.
-Fehlt etwas, frag nur das Fehlende — und warte auf die Antwort, statt
-Frage und Empfehlung in dieselbe Nachricht zu packen. Was du dabei
-annimmst statt weißt (z. B. "vermutlich keine Interviews vorhanden"),
-benenne als Annahme.
+No method selection without diagnosis. Clarify exactly these four
+things, via AskUserQuestion if available, otherwise as one compact
+question:
 
-Lies dann `references/auswahlmatrix.md` und schlage **eine** Methode vor,
-mit einem Satz Begründung und einer Alternative. Nicht drei gleichwertige
-Optionen anbieten — Auswahl ist die Leistung dieses Skills.
+1. Where are you? (problem unclear / solutions missing / decision due / testing)
+2. How many people?
+3. How much time?
+4. What exists already? (interviews, personas, idea list, nothing)
 
-## Phase 2 — Canvas rendern
+If the prompt already answers all four, don't ask again. If something
+is missing, ask only for what's missing — and wait for the answer
+instead of packing question and recommendation into the same message.
+Name what you assume rather than know (e.g. "presumably no interviews
+yet") as an assumption.
 
-**Rendere genau ein Canvas** — das der gewählten Methode. Die
-Folgemethode (`naechste_methoden`) wird erst nach der Auswertung in
-Phase 3 gerendert, nie auf Vorrat: ihr `kontext` besteht aus den
-Ergebnissen der aktuellen Methode, und die existieren vorher nicht.
-Ein HMW-Canvas ohne Erkenntnisse ist ein leeres Formular, kein
-Werkzeug.
+Then read `references/selection-matrix.md` and propose **one** method,
+with a one-sentence justification and one alternative. Don't offer
+three equal options — selection is this skill's job.
 
-Lies die Methodendatei unter `references/<phase>/<id>.md`. Nimm
-`assets/canvas-base.html` als Grundlage und ersetze den Block
-`/*__METHOD_CONFIG__*/` durch das JSON-Objekt, das du aus dem
-`canvas`-Block des Frontmatters ableitest (Schema: siehe Kommentar am
-Anfang von `canvas-base.html`). Ändere sonst nichts am Renderer — wenn
-eine Methode nicht ohne Renderer-Änderung darstellbar ist, ist das ein
-Schema-Problem, das gemeldet gehört, kein Anlass für Sonderlocken.
+## Phase 2 — Render the canvas
 
-Sonderfall `zonen_quelle` im `canvas`-Block: Die Zonen stehen dann nicht
-im Frontmatter, sondern du erzeugst sie beim Rendern aus dem benannten
-Input (z. B. eine Zone pro Idee der `ideen_liste`) — Details stehen in
-der jeweiligen Methodendatei. Der Renderer bekommt in jedem Fall ein
-fertiges `zonen`-Array.
+**Render exactly one canvas** — the chosen method's. The follow-up
+method (`next_methods`) is rendered only after the analysis in phase 3,
+never in advance: its `context` consists of the current method's
+results, which don't exist yet. An HMW canvas without insights is an
+empty form, not a tool.
 
-Das Artefakt braucht zwingend:
-- `durchfuehrung` und `tipps` im Config, befüllt aus den Abschnitten
-  "Ablauf" und "Moderationshinweise" der Methodendatei — vollständig
-  übernehmen, nicht auf einen Satz eindampfen; das Canvas muss auch
-  ohne den Chat daneben moderierbar sein. Für erklärungsbedürftige
-  Zonen zusätzlich `info` am Zonen-Objekt (ausklappbar hinter ⓘ).
-- Timer pro Zone, wenn `zeit_pro_zone` gesetzt ist
-- Persistenz über `window.storage` (Fallback localStorage) unter
+Read the method file at `references/<phase>/<id>.md`. Take
+`assets/canvas-base.html` as the base and replace the
+`/*__METHOD_CONFIG__*/` block with the JSON object you derive from the
+frontmatter's `canvas` block (schema: see the comment at the top of
+`canvas-base.html`). Change nothing else in the renderer — if a method
+can't be rendered without touching the renderer, that's a schema
+problem to report, not a reason for one-offs.
+
+Special case `zones_source` in the `canvas` block: the zones are then
+not in the frontmatter; you generate them at render time from the named
+input (e.g. one zone per idea in the `idea_list`) — details are in the
+method file. The renderer always receives a finished `zones` array.
+
+The artifact strictly needs:
+- `steps` and `tips` in the config, filled from the method file's
+  "Steps" and "Facilitation notes" sections — carry them over fully,
+  don't compress to one sentence; the canvas must be facilitatable
+  without the chat next to it. For zones that need explanation, add
+  `info` on the zone object (expandable behind ⓘ).
+- a `ui` block with all UI strings in the conversation language (see
+  renderer comment for keys; defaults are English)
+- a timer per zone when `time_per_zone` is set
+- persistence via `window.storage` (fallback localStorage) under
   `dt:<session_id>`
-- einen Button "Ergebnis exportieren", der exakt das Schema aus
-  `references/export-contract.md` in die Zwischenablage legt
-- eine sichtbare Zeile: "Fertig? Export klicken und hier einfügen."
+- an "Export result" button that places exactly the schema from
+  `references/export-contract.md` on the clipboard
+- a visible line: "Done? Click export and paste it here."
 
-`session_id` generierst du selbst: `dt-<datum>-<kurzid>`, z. B.
+You generate the `session_id` yourself: `dt-<date>-<shortid>`, e.g.
 `dt-2026-08-03-a1`.
 
-## Phase 3 — Auswertung
+## Phase 3 — Analysis
 
-Wenn Nutzende ein Export-JSON einfügen: gegen
-`references/export-contract.md` parsen, dann
+When users paste an export JSON: parse it against
+`references/export-contract.md`, then
 
-- clustern (thematisch, nicht alphabetisch — bei >20 Einträgen
-  `scripts/synthesize.py` nutzen)
-- Muster und Ausreißer benennen, Ausreißer nicht wegkürzen
-- `naechste_methoden` der Methodendatei prüfen und gegen die aktuelle
-  Diagnose spiegeln
-- genau einen nächsten Schritt vorschlagen
+- cluster (thematically, not alphabetically — with >20 entries use
+  `scripts/synthesize.py`)
+- name patterns and outliers; don't trim outliers away
+- check the method file's `next_methods` and mirror them against the
+  current diagnosis
+- propose exactly one next step
 
-Wenn eine Ideensammlung inhaltlich dünn ist, sag das. Ein Skill, der
-zwölf mittelmäßige Post-its zu "starken Impulsen" umdeutet, ist wertlos.
+If a collection of ideas is substantively thin, say so. A skill that
+reframes twelve mediocre sticky notes as "strong impulses" is
+worthless.
 
-## Prozesskette
+## Process chain
 
-`liefert_output` der einen Methode ist `braucht_input` der nächsten.
-Übernimm beim Rendern der Folgemethode die relevanten Ergebnisse der
-Vormethode in den `kontext`-Block des Canvas-Configs, damit sie im
-Artefakt sichtbar sind.
+One method's `provides_output` is the next method's `requires_input`.
+When rendering the follow-up method, carry the relevant results of the
+previous one into the canvas config's `context` block so they are
+visible in the artifact.

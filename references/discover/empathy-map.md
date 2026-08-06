@@ -1,75 +1,72 @@
 ---
 id: empathy-map
 phase: discover
-dauer_min: 40
-gruppe: [2, 8]
-braucht_input: [nutzer_beschreibung, rohnotizen]
-liefert_output: [empathie_erkenntnisse]
-gut_bei: [Nutzerperspektive fehlt, Team argumentiert aus Eigensicht, viele unsortierte Interviewnotizen]
-schlecht_bei: [weder Nutzerdaten noch Proxy-Quellen vorhanden, Entscheidung steht an]
+duration_min: 40
+group: [2, 8]
+requires_input: [user_description, raw_notes]
+provides_output: [empathy_insights]
+good_for: [missing user perspective, team argues from its own viewpoint, piles of unsorted interview notes]
+bad_for: [neither user data nor proxy sources available, a decision is due]
 canvas:
-  typ: quadrants
-  zonen:
+  type: quadrants
+  zones:
     - id: says
-      titel: "Sagt"
-      hinweis: "Wörtliche Zitate aus Interviews. Keine Interpretation."
+      title: "Says"
+      hint: "Verbatim quotes from interviews. No interpretation."
     - id: thinks
-      titel: "Denkt"
-      hinweis: "Was beschäftigt die Person vermutlich? Als Hypothese markieren."
+      title: "Thinks"
+      hint: "What is presumably on this person's mind? Mark as hypothesis."
     - id: does
-      titel: "Tut"
-      hinweis: "Beobachtetes Verhalten. Was tut sie tatsächlich — nicht was sie sagt, dass sie tut."
+      title: "Does"
+      hint: "Observed behavior. What they actually do — not what they say they do."
     - id: feels
-      titel: "Fühlt"
-      hinweis: "Emotionen, je ein Wort plus Auslöser: 'frustriert — weil …'"
-naechste_methoden: [hmw]
+      title: "Feels"
+      hint: "Emotions, one word plus trigger each: 'frustrated — because …'"
+next_methods: [hmw]
 ---
 
 # Empathy Map
 
-## Ablauf
+## Steps
 
-1. **Nutzer festlegen (5 min).** Eine konkrete Person oder ein scharf
-   umrissenes Segment. "Unsere Kunden" ist zu breit — dann lieber zwei
-   Maps.
-2. **Quadranten füllen (25 min).** Aus den Rohnotizen. Reihenfolge:
-   erst *Sagt* und *Tut* (beobachtbar), dann *Denkt* und *Fühlt*
-   (interpretiert). Jeder Eintrag ein eigenes Element, keine Sammelposten.
-3. **Spannungen markieren (10 min).** Wo widerspricht *Sagt* dem *Tut*?
-   Diese Widersprüche sind die wertvollsten Erkenntnisse und der
-   Rohstoff für HMW-Fragen.
+1. **Pick the user (5 min).** One concrete person or a sharply drawn
+   segment. "Our customers" is too broad — make two maps instead.
+2. **Fill the quadrants (25 min).** From the raw notes. Order: *Says*
+   and *Does* first (observable), then *Thinks* and *Feels*
+   (interpreted). One element per entry, no catch-alls.
+3. **Mark tensions (10 min).** Where does *Says* contradict *Does*?
+   These contradictions are the most valuable insights and the raw
+   material for HMW questions.
 
-## Proxy-Variante (keine Interviews vorhanden)
+## Proxy variant (no interviews available)
 
-Fehlen echte Nutzer-Rohnotizen, ist die Map trotzdem sinnvoll — wenn
-Proxy-Quellen existieren: Support-Tickets, Sales-Gespräche,
-Analytics-Auffälligkeiten, eigene Beobachtungen. Zwei Regeln machen
-den Unterschied zwischen Methode und Kaffeesatz:
+If there are no real user notes, the map is still useful — provided
+proxy sources exist: support tickets, sales conversations, analytics
+anomalies, your own observations. Two rules separate method from
+tea-leaf reading:
 
-1. **Quelle vs. Vermutung strikt trennen.** Einträge ohne Quelle sind
-   Hypothesen und werden als solche markiert (Präfix "H:").
-2. **Der eigentliche Output verschiebt sich:** Der Wert liegt weniger
-   in der Wahrheit der Einträge als darin, sichtbar zu machen, wo
-   Wissen und wo Hypothesen stehen. Die markierten Hypothesen werden
-   zur Interview-Liste — sag das vorher an, sonst wirkt die Map wie
-   validiertes Wissen.
+1. **Strictly separate source from assumption.** Entries without a
+   source are hypotheses and get marked as such (prefix "H:").
+2. **The actual output shifts:** the value lies less in the truth of
+   the entries than in making visible where knowledge ends and
+   hypothesis begins. The marked hypotheses become the interview list —
+   say that up front, or the map will read as validated knowledge.
 
-Gibt es auch keine Proxy-Quellen (neues Produkt, kein Kontakt zu
-Nutzern), ist die Methode falsch — dann ehrlich auf Nutzerforschung
-verweisen statt eine Map aus reinen Vermutungen zu bauen.
+If there are no proxy sources either (new product, no user contact),
+the method is wrong — honestly point to user research instead of
+building a map out of pure guesswork.
 
-## Moderationshinweise
+## Facilitation notes
 
-- Einträge ohne Beleg in den Rohnotizen gehören in *Denkt* als markierte
-  Hypothese, nicht in *Sagt*.
-- Wenn ein Quadrant leer bleibt, ist das ein Befund (Datenlücke), kein
-  Makel — nicht künstlich auffüllen.
+- Entries without evidence in the raw notes belong in *Thinks* as a
+  marked hypothesis, not in *Says*.
+- An empty quadrant is a finding (data gap), not a flaw — don't pad it.
 
-## Auswertungshinweise (Phase 3)
+## Analysis notes (phase 3)
 
-- Cluster über Quadranten hinweg bilden, nicht pro Quadrant.
-- Sagt/Tut-Widersprüche explizit als solche ausweisen.
-- Bei der Proxy-Variante: "H:"-Einträge getrennt auswerten und als
-  Interview-Liste ausgeben, nicht mit belegten Erkenntnissen mischen.
-- Output für die Kette: 3–5 `empathie_erkenntnisse` als je ein Satz,
-  jede mit Quadranten-Beleg.
+- Cluster across quadrants, not per quadrant.
+- Call out Says/Does contradictions explicitly.
+- Proxy variant: analyze "H:" entries separately and output them as an
+  interview list; don't mix them with evidenced insights.
+- Output for the chain: 3–5 `empathy_insights`, one sentence each,
+  each backed by a quadrant reference.

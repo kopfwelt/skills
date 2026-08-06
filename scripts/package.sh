@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Paketiert den Skill als dist/design-thinking-methods.zip für den
-# Upload in claude.ai (Settings → Capabilities → Skills).
+# Packages the skill as dist/design-thinking-methods.zip for upload
+# to claude.ai (Settings → Capabilities → Skills).
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -9,9 +9,9 @@ DIST="dist"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
-# Nur das, was der Skill zur Laufzeit braucht — kein README, kein dist.
+# Only what the skill needs at runtime (plus LICENSE) — no README, no dist.
 mkdir -p "$STAGE/$NAME"
-cp SKILL.md "$STAGE/$NAME/"
+cp SKILL.md LICENSE "$STAGE/$NAME/"
 cp -R references assets scripts "$STAGE/$NAME/"
 rm -f "$STAGE/$NAME/scripts/package.sh"
 

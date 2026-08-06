@@ -2,3 +2,4 @@
 *.png
 dist/
 .DS_Store
+.storyblok/

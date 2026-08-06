@@ -1,48 +1,49 @@
 ---
 id: hmw
 phase: define
-dauer_min: 25
-gruppe: [2, 10]
-braucht_input: [empathie_erkenntnisse]
-liefert_output: [problem_statement]
-gut_bei: [Erkenntnisse liegen vor aber kein Fokus, Team springt zu früh in Lösungen, Problem zu groß oder zu klein geschnitten]
-schlecht_bei: [keine Nutzererkenntnisse vorhanden, Problem-Statement existiert bereits und ist gut]
+duration_min: 25
+group: [2, 10]
+requires_input: [empathy_insights]
+provides_output: [problem_statement]
+good_for: [insights exist but no focus, team jumps to solutions too early, problem cut too large or too small]
+bad_for: [no user insights available, a good problem statement already exists]
 canvas:
-  typ: list
-  zonen:
-    - id: hmw_fragen
-      titel: "How-Might-We-Fragen"
-      hinweis: "Format: 'Wie könnten wir [Nutzer] helfen, [Bedürfnis], damit [Wirkung]?' Eine Frage pro Eintrag."
-    - id: favoriten
-      titel: "Favoriten (max. 2)"
-      hinweis: "Nach dem Sammeln: die 1–2 Fragen hierher kopieren, die weder zu eng (Lösung versteckt) noch zu weit (Weltfrieden) sind."
-naechste_methoden: [crazy-8s]
+  type: list
+  zones:
+    - id: hmw_questions
+      title: "How-Might-We questions"
+      hint: "Format: 'How might we help [user] to [need], so that [impact]?' One question per entry."
+    - id: favorites
+      title: "Favorites (max. 2)"
+      hint: "After collecting: copy the 1–2 questions here that are neither too narrow (solution in disguise) nor too broad (world peace)."
+next_methods: [crazy-8s]
 ---
 
 # How Might We (HMW)
 
-## Ablauf
+## Steps
 
-1. **Erkenntnisse sichten (5 min).** Die `empathie_erkenntnisse` (oder
-   andere Research-Ergebnisse) sind im Canvas-Kontext sichtbar. Jede
-   Erkenntnis ist ein Kandidat für mindestens eine HMW-Frage.
-2. **Fragen generieren (10 min).** Pro Erkenntnis 1–3 Umformulierungen.
-   Stellhebel zum Variieren: das Gute verstärken, das Schlechte
-   entfernen, das Gegenteil erkunden, die Annahme hinterfragen.
-3. **Kalibrieren und wählen (10 min).** Test pro Frage: Fallen euch
-   spontan mindestens 5 verschiedene Lösungsrichtungen ein? Weniger →
-   zu eng. Beliebig viele, aber alle banal → zu weit. Max. 2 Favoriten.
+1. **Review the insights (5 min).** The `empathy_insights` (or other
+   research results) are visible in the canvas context. Every insight
+   is a candidate for at least one HMW question.
+2. **Generate questions (10 min).** 1–3 reformulations per insight.
+   Levers to vary: amplify the good, remove the bad, explore the
+   opposite, question the assumption.
+3. **Calibrate and choose (10 min).** Test per question: can you
+   spontaneously think of at least 5 different solution directions?
+   Fewer → too narrow. Endless but all trivial → too broad. Max. 2
+   favorites.
 
-## Moderationshinweise
+## Facilitation notes
 
-- "Wie könnten wir eine App bauen, die …" ist keine HMW-Frage, sondern
-  eine versteckte Lösung. Zurückformulieren aufs Bedürfnis.
-- Der `damit`-Teil erzwingt die Wirkungsebene — nicht weglassen lassen.
+- "How might we build an app that …" is not an HMW question but a
+  hidden solution. Reformulate back to the need.
+- The "so that" part forces the impact level — don't let it be dropped.
 
-## Auswertungshinweise (Phase 3)
+## Analysis notes (phase 3)
 
-- Favoriten gegen die Erkenntnisse spiegeln: deckt jede Favoritenfrage
-  eine belegte Erkenntnis ab, oder ist eine Wunschidee durchgerutscht?
-- Output für die Kette: genau ein `problem_statement` (die stärkste
-  HMW-Frage), begründet in einem Satz. Der zweite Favorit wird als
-  Reserve notiert.
+- Mirror the favorites against the insights: does each favorite cover
+  an evidenced insight, or did a pet idea slip through?
+- Output for the chain: exactly one `problem_statement` (the strongest
+  HMW question), justified in one sentence. The second favorite is
+  noted as backup.

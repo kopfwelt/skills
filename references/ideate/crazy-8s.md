@@ -1,56 +1,56 @@
 ---
 id: crazy-8s
 phase: ideate
-dauer_min: 15
-gruppe: [1, 8]
-braucht_input: [problem_statement]
-liefert_output: [ideen_liste]
-gut_bei: [festgefahrene Diskussion, zu wenig Optionen, Quantität vor Qualität, Team klebt an der ersten Idee]
-schlecht_bei: [Problem noch unklar, Entscheidung steht an, Ideen sollen sofort bewertet werden]
+duration_min: 15
+group: [1, 8]
+requires_input: [problem_statement]
+provides_output: [idea_list]
+good_for: [stuck discussion, too few options, quantity over quality, team clings to its first idea]
+bad_for: [problem still unclear, a decision is due, ideas are to be judged immediately]
 canvas:
-  typ: grid
-  zeit_pro_zone: 60
-  zonen:
-    - { id: z1, titel: "Idee 1", hinweis: "" }
-    - { id: z2, titel: "Idee 2", hinweis: "" }
-    - { id: z3, titel: "Idee 3", hinweis: "" }
-    - { id: z4, titel: "Idee 4", hinweis: "" }
-    - { id: z5, titel: "Idee 5", hinweis: "" }
-    - { id: z6, titel: "Idee 6", hinweis: "" }
-    - { id: z7, titel: "Idee 7", hinweis: "" }
-    - { id: z8, titel: "Idee 8", hinweis: "" }
-naechste_methoden: [dot-voting, impact-effort-matrix]
+  type: grid
+  time_per_zone: 60
+  zones:
+    - { id: z1, title: "Idea 1", hint: "" }
+    - { id: z2, title: "Idea 2", hint: "" }
+    - { id: z3, title: "Idea 3", hint: "" }
+    - { id: z4, title: "Idea 4", hint: "" }
+    - { id: z5, title: "Idea 5", hint: "" }
+    - { id: z6, title: "Idea 6", hint: "" }
+    - { id: z7, title: "Idea 7", hint: "" }
+    - { id: z8, title: "Idea 8", hint: "" }
+next_methods: [dot-voting, impact-effort-matrix]
 ---
 
 # Crazy 8s
 
-## Ablauf
+## Steps
 
-1. **Problem-Statement sichtbar machen (1 min).** Steht im
-   Canvas-Kontext. Alle lesen es einmal laut.
-2. **8 × 60 Sekunden (8 min).** Pro Zone eine Idee, der Timer treibt.
-   Original ist Skizzieren auf Papier — im digitalen Canvas: 1–2 Sätze
-   oder Stichworte, die die Idee unterscheidbar machen. Keine Zone
-   auslassen, Wiederholung mit Variation ist erlaubt.
-3. **Kurz vorstellen (5 min bei Gruppen).** Jede Person die eigenen 8 in
-   je einem Satz. Keine Diskussion, keine Bewertung — das ist die
-   nächste Methode.
+1. **Make the problem statement visible (1 min).** It's in the canvas
+   context. Everyone reads it aloud once.
+2. **8 × 60 seconds (8 min).** One idea per zone, the timer drives.
+   The original is sketching on paper — in the digital canvas: 1–2
+   sentences or keywords that make the idea distinguishable. Skip no
+   zone; repetition with variation is allowed.
+3. **Brief share-out (5 min in groups).** Each person presents their 8
+   in one sentence each. No discussion, no judgment — that's the next
+   method.
 
-## Moderationshinweise
+## Facilitation notes
 
-- Der Timer ist die Methode. Wer nach 60 s nicht fertig ist: nächste
-  Zone trotzdem. Unfertig ist erwünscht.
-- Ideen 5–8 sind statistisch die interessanteren — die ersten vier sind
-  meist das, was ohnehin schon im Raum war. Das vorher sagen nimmt den
-  Druck.
+- The timer IS the method. Not done after 60 s? Next zone anyway.
+  Unfinished is intended.
+- Ideas 5–8 are statistically the more interesting ones — the first
+  four are usually what was already in the room. Saying this up front
+  takes the pressure off.
 
-## Auswertungshinweise (Phase 3)
+## Analysis notes (phase 3)
 
-- Thematisch clustern, aber Solitäre (Ausreißer) als eigene Kategorie
-  stehen lassen — sie nicht in das nächstbeste Cluster pressen.
-- Prüfen, ob die Sammlung nur Varianten einer einzigen Grundidee
-  enthält. Wenn ja: das sagen und eine zweite Runde mit Provokation
-  ("verbietet die naheliegende Lösung") vorschlagen.
-- Output für die Kette: `ideen_liste` geclustert; nächster Schritt ist
-  Priorisierung (dot-voting bei Gruppen, impact-effort-matrix wenn
-  Machbarkeit die kritische Dimension ist).
+- Cluster thematically, but keep solitaires (outliers) as their own
+  category — don't squeeze them into the nearest cluster.
+- Check whether the collection contains only variants of one base
+  idea. If so: say it and propose a second round with a provocation
+  ("ban the obvious solution").
+- Output for the chain: `idea_list`, clustered; next step is
+  prioritization (dot-voting for groups, impact-effort-matrix when
+  feasibility is the critical dimension).

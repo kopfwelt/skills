@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Clustert die Eingaben eines Export-JSON thematisch (für Phase 3, >20 Einträge).
+"""Clusters the entries of an export JSON thematically (phase 3, >20 entries).
 
-Aufruf:  python3 scripts/synthesize.py export.json
-         cat export.json | python3 scripts/synthesize.py
+Usage:  python3 scripts/synthesize.py export.json
+        cat export.json | python3 scripts/synthesize.py
 
-Gibt JSON mit Clustern (nach Wortüberlappung) und Solitären aus. Das ist
-bewusst nur eine Vorsortierung — die inhaltliche Benennung und Bewertung
-der Cluster bleibt Aufgabe des Skills, nicht dieses Scripts.
+Outputs JSON with clusters (by word overlap) and outliers. This is
+deliberately just a pre-sort — naming and judging the clusters remains
+the skill's job, not this script's.
 """
 import json
 import re
@@ -14,13 +14,17 @@ import sys
 from itertools import combinations
 
 STOPWORDS = {
+    # German
     "der", "die", "das", "und", "oder", "ein", "eine", "einen", "einem", "einer",
     "ist", "sind", "war", "mit", "für", "von", "auf", "aus", "bei", "als", "auch",
     "nicht", "kein", "keine", "wir", "ihr", "sie", "ich", "man", "sich", "dass",
     "wie", "was", "wenn", "dann", "noch", "nur", "aber", "mehr", "sehr", "kann",
+    # English
     "the", "and", "for", "with", "that", "this", "not", "are", "was", "can",
+    "have", "has", "our", "their", "them", "they", "you", "your", "its", "but",
+    "all", "any", "more", "very", "when", "then", "than", "into", "out",
 }
-MIN_OVERLAP = 2  # gemeinsame signifikante Wörter, ab denen zwei Einträge verbunden gelten
+MIN_OVERLAP = 2  # shared significant words above which two entries count as linked
 
 
 def tokens(text):
@@ -30,7 +34,7 @@ def tokens(text):
 
 def cluster(entries):
     toks = [tokens(e["text"]) for e in entries]
-    # Union-Find über Paare mit ausreichender Wortüberlappung
+    # union-find over pairs with sufficient word overlap
     parent = list(range(len(entries)))
 
     def find(i):
@@ -47,35 +51,35 @@ def cluster(entries):
     for i in range(len(entries)):
         groups.setdefault(find(i), []).append(i)
 
-    clusters, solitaere = [], []
+    clusters, outliers = [], []
     for members in groups.values():
         if len(members) == 1:
-            solitaere.append(entries[members[0]])
+            outliers.append(entries[members[0]])
             continue
         shared = set.intersection(*(toks[m] for m in members)) or set.union(
             *(toks[m] for m in members)
         )
         clusters.append({
-            "schluesselwoerter": sorted(shared)[:5],
-            "eintraege": [entries[m] for m in members],
+            "keywords": sorted(shared)[:5],
+            "entries": [entries[m] for m in members],
         })
-    clusters.sort(key=lambda c: -len(c["eintraege"]))
-    return clusters, solitaere
+    clusters.sort(key=lambda c: -len(c["entries"]))
+    return clusters, outliers
 
 
 def main():
     raw = open(sys.argv[1]).read() if len(sys.argv) > 1 else sys.stdin.read()
     export = json.loads(raw)
-    entries = export.get("eingaben", [])
+    entries = export.get("entries", [])
     if not entries:
-        sys.exit("Keine eingaben[] im Export gefunden.")
-    clusters, solitaere = cluster(entries)
+        sys.exit("No entries[] found in the export.")
+    clusters, outliers = cluster(entries)
     json.dump(
         {
             "method_id": export.get("method_id"),
-            "anzahl_eintraege": len(entries),
-            "cluster": clusters,
-            "solitaere": solitaere,
+            "entry_count": len(entries),
+            "clusters": clusters,
+            "outliers": outliers,
         },
         sys.stdout,
         ensure_ascii=False,

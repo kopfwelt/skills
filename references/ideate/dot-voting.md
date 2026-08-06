@@ -1,59 +1,58 @@
 ---
 id: dot-voting
 phase: ideate
-dauer_min: 10
-gruppe: [3, 12]
-braucht_input: [ideen_liste]
-liefert_output: [priorisierte_ideen]
-gut_bei: [zu viele Optionen, Diskussion dreht sich im Kreis, dominante Stimmen verzerren die Auswahl, schnelle demokratische Vorauswahl nötig]
-schlecht_bei: [weniger als 5 Optionen, Entscheidung braucht Machbarkeitsbewertung, Einzelperson ohne Gruppe]
+duration_min: 10
+group: [3, 12]
+requires_input: [idea_list]
+provides_output: [prioritized_ideas]
+good_for: [too many options, discussion going in circles, dominant voices skew the choice, quick democratic shortlisting needed]
+bad_for: [fewer than 5 options, decision needs a feasibility assessment, single person without a group]
 canvas:
-  typ: grid
-  zonen_quelle: ideen_liste
-naechste_methoden: [impact-effort-matrix]
+  type: grid
+  zones_source: idea_list
+next_methods: [impact-effort-matrix]
 ---
 
 # Dot Voting
 
-## Zonen-Erzeugung (Phase 2)
+## Zone generation (phase 2)
 
-`zonen_quelle: ideen_liste` heißt: Die Zonen stehen nicht in dieser
-Datei, sondern werden beim Rendern aus dem Input erzeugt — **eine Zone
-pro Idee bzw. Cluster** aus der `ideen_liste` der Vormethode:
+`zones_source: idea_list` means: the zones are not in this file but
+are generated at render time from the input — **one zone per idea or
+cluster** from the previous method's `idea_list`:
 
-- `id`: Slug der Idee (`z-video-tutorial`)
-- `titel`: die Idee in Kurzform (max. ~8 Wörter)
-- `hinweis`: bei Clustern die enthaltenen Einzelideen in einem Satz
+- `id`: slug of the idea (`z-video-tutorial`)
+- `title`: the idea in short form (max. ~8 words)
+- `hint`: for clusters, the contained individual ideas in one sentence
 
-Bei mehr als 12 Ideen vorher clustern (Phase 3 der Vormethode) und über
-Cluster abstimmen lassen, nicht über 20 Einzelzettel.
+With more than 12 ideas, cluster first (phase 3 of the previous
+method) and vote on clusters, not on 20 individual sticky notes.
 
-## Ablauf
+## Steps
 
-1. **Budget festlegen (1 min).** Jede Person bekommt Stimmen nach der
-   Faustregel *Anzahl Optionen ÷ 3*, mindestens 2, höchstens 5. Das
-   Budget steht in der Anleitung des Canvas.
-2. **Still abstimmen (5 min).** Pro Stimme einen Eintrag in die Zone
-   der gewählten Idee: den eigenen Namen oder ein `●`. Kumulieren ist
-   erlaubt (mehrere Stimmen auf eine Idee), aber ansagen. Keine
-   Diskussion während der Abstimmung — sonst wird das erste laute
-   Argument zum Anker.
-3. **Auszählen und Schnitt (4 min).** Einträge pro Zone = Stimmen.
-   Weiter kommen die oberen 2–4, nicht "alles über null".
+1. **Set the budget (1 min).** Each person gets votes by the rule of
+   thumb *number of options ÷ 3*, at least 2, at most 5. The budget
+   goes into the canvas instructions.
+2. **Vote silently (5 min).** Per vote, one entry in the zone of the
+   chosen idea: your name or a `●`. Cumulating is allowed (several
+   votes on one idea), but announce it. No discussion during voting —
+   otherwise the first loud argument becomes the anchor.
+3. **Count and cut (4 min).** Entries per zone = votes. The top 2–4
+   advance, not "everything above zero".
 
-## Moderationshinweise
+## Facilitation notes
 
-- Reihenfolge der Zonen vor der Abstimmung mischen (nicht in der
-  Entstehungsreihenfolge lassen) — Positionseffekte sind real.
-- Wer zuerst abstimmt, ankert. Bei starkem Hierarchiegefälle: ranghöchste
-  Person stimmt zuletzt.
+- Shuffle the zone order before voting (don't leave creation order) —
+  position effects are real.
+- Whoever votes first, anchors. With a steep hierarchy gradient: the
+  most senior person votes last.
 
-## Auswertungshinweise (Phase 3)
+## Analysis notes (phase 3)
 
-- Stimmen pro Zone zählen und als Rangliste ausgeben.
-- Knappe Abstände (±1 Stimme) nicht als klares Ergebnis verkaufen —
-  benennen und ggf. Stichentscheid oder impact-effort-matrix für die
-  Spitzengruppe vorschlagen.
-- Ideen mit null Stimmen im Protokoll behalten (nicht löschen) — sie
-  sind für spätere Runden manchmal die interessantesten.
-- Output für die Kette: `priorisierte_ideen` = Top 2–4 mit Stimmenzahl.
+- Count votes per zone and output as a ranking.
+- Don't sell narrow margins (±1 vote) as a clear result — name them
+  and, if needed, propose a tie-break or impact-effort-matrix for the
+  top group.
+- Keep zero-vote ideas in the record (don't delete) — they are
+  sometimes the most interesting ones for later rounds.
+- Output for the chain: `prioritized_ideas` = top 2–4 with vote counts.
