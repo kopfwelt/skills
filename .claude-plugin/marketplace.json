@@ -9,13 +9,16 @@
     {
       "name": "kopfwelt-skills",
       "source": "./",
-      "description": "Design thinking facilitation skills — method selection, interactive workshop canvases, result analysis.",
+      "description": "Design thinking facilitation plus workflow skills: one derived board of everything in flight, and portable session handoffs.",
       "category": "productivity",
       "keywords": [
         "design-thinking",
         "facilitation",
         "workshops",
-        "ideation"
+        "ideation",
+        "workflow",
+        "wip",
+        "handoff"
       ]
     }
   ]
