@@ -1,14 +1,16 @@
 # Kopfwelt Skills
 
-Agent skills by [Kopfwelt](https://kopfwelt.com) — starting with design
-thinking facilitation. Documentation lives at
-[kopfwelt.com/skills](https://kopfwelt.com/skills).
+Agent skills by [Kopfwelt](https://kopfwelt.com) — design thinking
+facilitation, and workflow skills for keeping track of work in flight.
+Documentation lives at [kopfwelt.com/skills](https://kopfwelt.com/skills).
 
 ## Skills
 
 | Skill | Category | What it does |
 |---|---|---|
 | [design-thinking-methods](skills/facilitation/design-thinking-methods) | facilitation | Selects the right design thinking method for your situation, renders it as an interactive workshop canvas, and analyzes the results to propose the next step. Canvases render in the conversation language. |
+| [wip](skills/workflow/wip) | workflow | Builds one board of everything in flight — open PRs, branches without a PR, stray worktrees, uncommitted work, review requests, parked handoffs — derived from git and GitHub instead of maintained by hand. |
+| [handoff](skills/workflow/handoff) | workflow | Writes the live thread of a long session into a portable document, so another agent, harness, or colleague can continue without re-reading the conversation. |
 
 ## Installation
 
@@ -30,7 +32,7 @@ Each skill can be packaged as a zip for claude.ai
 (Settings → Capabilities → Skills):
 
 ```bash
-./skills/facilitation/design-thinking-methods/scripts/package.sh
+./skills/<category>/<skill-name>/scripts/package.sh
 ```
 
 ## Repository layout

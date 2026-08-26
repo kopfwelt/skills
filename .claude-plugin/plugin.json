@@ -1,7 +1,7 @@
 {
   "name": "kopfwelt-skills",
-  "version": "0.1.0",
-  "description": "Kopfwelt's agent skills — starting with design thinking facilitation: method selection, interactive workshop canvases, and result analysis.",
+  "version": "0.2.0",
+  "description": "Kopfwelt's agent skills — design thinking facilitation, plus workflow skills for keeping track of work in flight and handing sessions over.",
   "author": {
     "name": "Kopfwelt",
     "url": "https://kopfwelt.com"
@@ -15,9 +15,16 @@
     "workshops",
     "ideation",
     "canvas",
-    "skills"
+    "skills",
+    "workflow",
+    "wip",
+    "handoff",
+    "kanban",
+    "context-management"
   ],
   "skills": [
-    "./skills/facilitation/design-thinking-methods"
+    "./skills/facilitation/design-thinking-methods",
+    "./skills/workflow/wip",
+    "./skills/workflow/handoff"
   ]
 }
