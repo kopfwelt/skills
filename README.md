@@ -16,9 +16,17 @@ Documentation lives at [kopfwelt.com/skills](https://kopfwelt.com/skills).
 
 ### Claude Code (plugin)
 
+Add the marketplace once, then install from it:
+
 ```bash
-claude plugins install kopfwelt-skills@kopfwelt/skills
+claude plugin marketplace add kopfwelt/skills
+claude plugin install kopfwelt-skills@kopfwelt
 ```
+
+The id after `@` is the **marketplace name** from
+`.claude-plugin/marketplace.json` — `kopfwelt` — not the repository path.
+Installing before the marketplace is added fails with "not found in
+marketplace", which reads like a stale cache but means it was never added.
 
 ### Any agent (copy skill files)
 
