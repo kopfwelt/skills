@@ -28,7 +28,7 @@ away, and the skill is the judgment applied to their output.
 | `--copilot` | off | Request a GitHub Copilot review and wait for it |
 | `--comment` / `--no-comment` | on | Post review findings as inline PR comments |
 | `--fix` / `--no-fix` | on | Apply review findings and commit them |
-| `--no-review` | – | Skip review entirely; stop at the open PR |
+| `--no-review` | – | Skip review entirely (Copilot included); stop at the open PR |
 | `--draft` | off | Open the PR as a draft |
 
 Copilot is opt-in because it is the only step that can stall a run for ten

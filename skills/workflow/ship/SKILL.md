@@ -33,7 +33,7 @@ description of the work.
 | `--copilot` | **off** | Request a GitHub Copilot review and wait for it |
 | `--comment` / `--no-comment` | **on** | Post review findings as inline PR comments |
 | `--fix` / `--no-fix` | **on** | Apply review findings and commit them |
-| `--no-review` | – | Skip review entirely; stop at the open PR |
+| `--no-review` | – | Skip review entirely (Copilot included); stop at the open PR |
 | `--draft` | off | Open the PR as a draft |
 
 Name the active options in one line before starting. Copilot is off by
@@ -45,15 +45,26 @@ that can stall a run for ten minutes and return nothing.
 Not a git repo, or nothing to ship (clean tree *and* no commits ahead of
 the base) → say so and stop. Do not create an empty branch.
 
-Read the diff for secrets before the first `git add`: credentials, tokens,
-`.env` contents, private keys. Anything suspicious stops the run — a
-secret in a pushed commit stays in the history even after the fix.
+Read everything that will be pushed for secrets — credentials, tokens,
+`.env` contents, private keys — before the first `git add`: the working
+tree (`git diff`, `git diff --cached`, untracked files) **and** commits
+already made but not yet pushed (`git diff origin/<base>...HEAD`). The
+second half is easy to skip and is the dangerous one: work committed
+locally before the skill was invoked reaches step 4 without ever having
+been staged. Anything suspicious stops the run — a secret in a pushed
+commit stays in the history even after the fix.
 
 ## 2 — Branch
 
 On the default branch (`main`/`master`/`develop`) → create
 `<type>/<kebab-case>` with type from `feat|fix|chore|docs|refactor`,
-derived from the description or, failing that, from the actual diff.
+derived from the description or, failing that, from the actual diff. If
+that name already exists, switch to it if it is the same work, otherwise
+suffix it — do not let a collision abort the run. Where commits were
+already made on the default branch, move it back to its upstream
+(`git branch -f <default> origin/<default>`) after branching, or the user
+is left with a diverged local `main` once the PR merges.
+
 Already on a feature branch → stay on it. Never branch off a branch that
 is already the work.
 
@@ -76,10 +87,15 @@ hook changed something.
 `git push -u origin <branch>`. A rejected push is reported, never forced —
 `--force` without being asked is how someone else's commits disappear.
 
-`gh pr create` against the default branch, `.github/pull_request_template.md`
-as the template where it exists. Body: **what**, **why**, **how tested** —
-and "not tested" is an honest answer where nothing ran. A PR already open
-for this branch is reused, not duplicated.
+Check for an existing PR first — `gh pr list --head <branch> --json
+number,url` — and reuse it. `gh pr create` fails on a branch that already
+has one, and the second run over the same branch is the normal case, not
+the exception.
+
+Otherwise `gh pr create` against the default branch,
+`.github/pull_request_template.md` as the template where it exists. Body:
+**what**, **why**, **how tested** — and "not tested" is an honest answer
+where nothing ran.
 
 ## 5 — Merge conflicts
 
@@ -87,11 +103,16 @@ for this branch is reused, not duplicated.
 gh pr view <PR> --json mergeable,mergeStateStatus,baseRefName
 ```
 
-`mergeable` is `UNKNOWN` for a few seconds after a push — GitHub computes it
-asynchronously. Query once more before concluding anything.
+`mergeable` is `UNKNOWN` right after a push — GitHub computes it
+asynchronously. Query a few more times before concluding anything, and if
+it is still `UNKNOWN`, decide locally (`git fetch origin <base>` then
+`git merge-tree`) rather than reading "not `CONFLICTING`" as "clean".
 
-Conflicting: `git merge origin/<base>` — merge, not rebase. A rebase on a
-pushed branch forces a force-push, and this skill does not force-push.
+Conflicting: `git fetch origin <base>` **first**, then
+`git merge origin/<base>` — merge, not rebase. Without the fetch,
+`origin/<base>` is whatever the last fetch left behind, and the merge
+succeeds against a stale base while the PR stays conflicting. A rebase on
+a pushed branch forces a force-push, and this skill does not force-push.
 
 Resolve each file by reading both sides and keeping both intentions. Never
 blanket `--ours`/`--theirs`: it resolves the conflict and silently drops
@@ -111,6 +132,12 @@ resolution you are not sure about — a bad resolution is invisible in the
 diff, because the file looks intentional either way.
 
 ## 6 — Copilot review (only with `--copilot`)
+
+Skipped entirely with `--no-review` — a Copilot review nobody judges is
+ten minutes spent on output that is then thrown away. With `--draft`, mark
+the PR ready first or skip the step and say so: Copilot does not review a
+draft PR, the reviewer request still succeeds, and the wait below then
+burns its full timeout for nothing.
 
 Request it, then wait in the background:
 
@@ -136,7 +163,8 @@ done
 exit 1
 ```
 
-Roughly ten minutes. On timeout, continue without it and say so. Then read
+Roughly ten minutes. The non-zero exit means "not arrived", not "step
+failed" — on timeout, continue without it and say so. Then read
 both halves — the summary body and the inline comments:
 
 ```bash
