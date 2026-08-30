@@ -30,6 +30,19 @@ The id after `@` is the **marketplace name** from
 Installing before the marketplace is added fails with "not found in
 marketplace", which reads like a stale cache but means it was never added.
 
+Updating is two steps — run both, or a newly released skill may stay
+invisible:
+
+```bash
+claude plugin marketplace update kopfwelt
+claude plugin update kopfwelt-skills
+```
+
+The first refreshes the marketplace's copy of this repo, the second
+installs from it. Whether `plugin update` refreshes the marketplace on its
+own is not documented, so do not rely on it. Applying either needs a
+restart of Claude Code.
+
 ### Any agent (copy skill files)
 
 ```bash
