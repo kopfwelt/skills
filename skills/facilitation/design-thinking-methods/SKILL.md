@@ -1,5 +1,6 @@
 ---
 name: design-thinking-methods
+title: Design Thinking
 description: Selects the right design thinking method for the situation,
   renders it as an interactive canvas artifact, and analyzes the entered
   results to propose the next process step. Use whenever the conversation

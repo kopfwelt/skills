@@ -163,7 +163,9 @@ repo_json() {
   done < <(git -C "$dir" worktree list --porcelain 2>/dev/null \
            | awk '/^worktree /{print $2}')
 
-  # Handoff documents left by the companion /handoff skill.
+  # Handoff documents — a parked thread with a written next step. The
+  # companion skill that wrote them was removed; existing documents and
+  # any written by hand still count.
   ho_lines=$(ls -1t "$dir"/.claude/handoffs/*.md 2>/dev/null)
 
   # A single jq call per repo assembles and filters the whole object.

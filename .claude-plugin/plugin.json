@@ -1,7 +1,7 @@
 {
   "name": "kopfwelt-skills",
-  "version": "0.3.0",
-  "description": "Kopfwelt's agent skills — design thinking facilitation, plus workflow skills for keeping track of work in flight, handing sessions over, and shipping work to a reviewed pull request.",
+  "version": "0.4.0",
+  "description": "Kopfwelt's agent skills — design thinking facilitation, plus workflow skills for keeping track of work in flight and shipping it to a reviewed pull request.",
   "author": {
     "name": "Kopfwelt",
     "url": "https://kopfwelt.com"
@@ -18,7 +18,6 @@
     "skills",
     "workflow",
     "wip",
-    "handoff",
     "kanban",
     "context-management",
     "ship",
@@ -29,7 +28,6 @@
   "skills": [
     "./skills/facilitation/design-thinking-methods",
     "./skills/workflow/wip",
-    "./skills/workflow/handoff",
     "./skills/workflow/ship"
   ]
 }

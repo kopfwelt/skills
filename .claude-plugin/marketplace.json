@@ -9,7 +9,7 @@
     {
       "name": "kopfwelt-skills",
       "source": "./",
-      "description": "Design thinking facilitation plus workflow skills: one derived board of everything in flight, portable session handoffs, and working-tree-to-reviewed-PR shipping.",
+      "description": "Design thinking facilitation plus workflow skills: one derived board of everything in flight, and working-tree-to-reviewed-PR shipping.",
       "category": "productivity",
       "keywords": [
         "design-thinking",
@@ -18,7 +18,6 @@
         "ideation",
         "workflow",
         "wip",
-        "handoff",
         "ship",
         "pull-request",
         "code-review"
