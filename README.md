@@ -1,8 +1,8 @@
 # Kopfwelt Skills
 
 Agent skills by [Kopfwelt](https://kopfwelt.com) — design thinking
-facilitation, and workflow skills for keeping track of work in flight and
-getting it shipped. Documentation lives at
+facilitation, and workflow skills for keeping track of work in flight,
+writing it up, and getting it shipped. Documentation lives at
 [kopfwelt.com/skills](https://kopfwelt.com/skills).
 
 ## Skills
@@ -11,6 +11,7 @@ getting it shipped. Documentation lives at
 |---|---|---|
 | [design-thinking-methods](skills/facilitation/design-thinking-methods) | facilitation | Selects the right design thinking method for your situation, renders it as an interactive workshop canvas, and analyzes the results to propose the next step. Canvases render in the conversation language. |
 | [wip](skills/workflow/wip) | workflow | Builds one board of everything in flight — open PRs, branches without a PR, stray worktrees, uncommitted work, review requests, parked handoffs — derived from git and GitHub instead of maintained by hand. |
+| [issue](skills/workflow/issue) | workflow | Turns a finding into a GitHub issue that someone can act on: verified against the code, categorized in the repo's own label set, given one severity, cross-referenced — and checked against the open and closed issues before anything is created. |
 | [ship](skills/workflow/ship) | workflow | Takes work from the working tree to a reviewed pull request — branch, commits, push, PR, merge-conflict resolution, and a code review whose findings are judged before they are applied. Optionally waits for a GitHub Copilot review. |
 
 ## Installation
