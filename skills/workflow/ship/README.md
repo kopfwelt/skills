@@ -55,8 +55,18 @@ ways a diff does not show:
   a rebase on a pushed branch would require the force-push this skill
   refuses to do.
 
-The fourth is not irreversible, just wrong: **review findings are judged,
-not applied.** Copilot in particular emits reliable noise alongside real
+The fourth is not irreversible but silently wrong, and it took a real PR to
+find: **GitHub's closing keywords are parsed, not read.** A PR body written
+in German quite naturally opens with "Behebt #1329" — and the `#1329` in it
+produces a cross-reference in the issue's timeline, so from the issue it
+looks linked. It is not: the PR never enters the Development sidebar and the
+issue stays open after the merge. So the keyword line stays English
+(`Closes #1329`) regardless of the body's language, and the skill verifies
+what GitHub actually parsed via `gh pr view --json closingIssuesReferences`
+instead of trusting that it wrote the right word.
+
+The fifth is not irreversible either, just wrong: **review findings are
+judged, not applied.** Copilot in particular emits reliable noise alongside real
 bugs. A finding that is wrong gets a reasoned reply in the thread instead
 of a commit, a style opinion the repo does not hold loses to the
 convention, and anything that would change architecture, public API or the

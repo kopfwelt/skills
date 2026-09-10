@@ -23,6 +23,9 @@ This skill is written in English. **Everything the user sees is produced
 in the conversation language**: commit subjects follow the repo's
 existing language, PR body and summary follow the conversation.
 
+One exception, and it is not stylistic: **GitHub's closing keywords stay
+English**. They are parsed, not read. See step 4.
+
 ## Options
 
 Read these from the invocation; treat the rest of the input as the
@@ -96,6 +99,50 @@ Otherwise `gh pr create` against the default branch,
 `.github/pull_request_template.md` as the template where it exists. Body:
 **what**, **why**, **how tested** — and "not tested" is an honest answer
 where nothing ran.
+
+### Linking the issue
+
+Where the work closes an issue, the body carries the reference on **its own
+line, with an English keyword**:
+
+```
+Closes #1329
+```
+
+GitHub parses exactly three verbs and their forms — `close`/`closes`/`closed`,
+`fix`/`fixes`/`fixed`, `resolve`/`resolves`/`resolved`. **A translated verb
+does not work.** "Behebt #1329" is not a keyword; the `#1329` in it still
+produces a cross-reference in the issue's timeline, so the issue *looks*
+linked — but the PR is not in its Development sidebar and the issue does not
+close on merge. That is the whole trap: the failure is invisible from the
+issue, and it surfaces weeks later as a closed PR next to an open issue.
+
+Write the German sentence as prose if it reads better, and put the keyword
+line underneath it. Two mechanisms, one of which is machine-readable.
+
+Further rules the keyword actually obeys:
+
+- **One keyword per issue.** `Closes #12, #13` links only #12. Write
+  `Closes #12` and `Closes #13`.
+- **Same repository only**, unless written `Closes owner/repo#12`.
+- **Closes on merge into the default branch.** A PR against a release branch
+  gets the link but not the close.
+
+Then verify it, because writing the keyword is not evidence that GitHub read
+it:
+
+```bash
+gh pr view <PR> --json closingIssuesReferences --jq '[.closingIssuesReferences[].number]'
+```
+
+Empty while an issue was named → the keyword was not parsed. Fix the body
+(`gh pr edit <PR> --body-file …`) and check again. Never fall back to asking
+the user to link it by hand in the Development sidebar — that is the manual
+step this exists to remove.
+
+Issues that the PR *relates to* but does not close get a bare `#1234` in the
+prose, never a keyword: a keyword on a partially addressed issue closes it
+early, and reopening loses the discussion order.
 
 ## 5 — Merge conflicts
 
@@ -207,8 +254,8 @@ Push, then re-check merge state: the base may have moved while you worked.
 
 ## Report
 
-Short, in this order: branch, commit count, PR URL · conflicts and how they
-were resolved · Copilot (arrived, timed out, unavailable) with findings
+Short, in this order: branch, commit count, PR URL · the issues the PR
+closes, as GitHub confirmed them · conflicts and how they were resolved · Copilot (arrived, timed out, unavailable) with findings
 accepted vs. rejected and why · your own findings by severity and what was
 fixed · what is still open and needs a decision.
 
