@@ -80,6 +80,11 @@ its own folder. See each skill's README for its architecture.
    `name`, `description`).
 2. Add the path to `skills` in `.claude-plugin/plugin.json`.
 3. Add a row to the table above.
+4. Run `python3 scripts/check_frontmatter.py` (needs `pyyaml`; CI runs it
+   on every PR). Frontmatter values must be plain scalars that a strict
+   YAML parser accepts — no `: ` inside a value, and no `>-`, `|` or quotes,
+   because the kopfwelt.com skill pages read them line by line. Use an
+   em dash where a colon would go.
 
 ## License
 
