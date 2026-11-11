@@ -1,7 +1,7 @@
 ---
 name: ship
-summary: Takes work from the working tree to a reviewed pull request: branch,
-  commits, push, PR, merge-conflict resolution and a code review with the
+summary: Takes work from the working tree to a reviewed pull request —
+  branch, commits, push, PR, merge-conflict resolution and a code review with the
   fixes applied.
 description: Takes work that exists only in the working tree all the way to a
   reviewed pull request — branch, commits, push, PR, merge-conflict
